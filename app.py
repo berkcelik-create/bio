@@ -37,7 +37,7 @@ st.header("Projelerim")
 with st.container(border=True):
     st.subheader("G-ENGINE")
     st.write("Donanım arama motoru ve fiyat takip uygulaması.")
-    st.link_button("Projeye Git", "https://vxeveo9qb4bsrlbcwb8qv2.streamlit.app/")
+    st.link_button("Projeye Git", "https://github.com/KULLANICI_ADIN/G-ENGINE")
 
 # Başka projelerin varsa buraya kopyala-yapıştır yapabilirsin
 with st.container(border=True):
