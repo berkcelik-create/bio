@@ -26,3 +26,7 @@ with st.container(border=True):
     st.write("Hardware takip ve arama motoru projem.")
     if st.button("Detayları Gör"):
         st.write("Proje detayları buraya eklenecek.")
+with st.sidebar:
+    st.write("### Sosyal Medya")
+    st.markdown("[LinkedIn](https://linkedin.com/in/kullanici-adin)")
+    st.markdown("[Discord](https://discord.gg/...)")
