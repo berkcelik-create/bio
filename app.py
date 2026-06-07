@@ -69,12 +69,8 @@ st.markdown(contact_form, unsafe_allow_html=True)
 st.divider()
 st.caption(f"Bu site {visitor_count} kez görüntülendi.")
 # Koddaki ilgili kısmı şu şekilde güncelle:
-contact_form = """
-<form action="https://formspree.io/f/xykaebdy" method="POST">
-    ...
-</form>
-"""
+
 # İletişim Formu yerine bu butonu kullan
 st.subheader("📩 İletişim")
 st.write("Bana doğrudan mail göndermek için aşağıdaki butonu kullanabilirsin:")
-st.link_button("E-posta Gönder", "mailto:senin_mail_adresin@email.com")
+st.link_button("E-posta Gönder", "berkcelik2006@gmail.com")
