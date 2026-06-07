@@ -68,3 +68,9 @@ st.markdown(contact_form, unsafe_allow_html=True)
 # --- FOOTER & SAYAÇ ---
 st.divider()
 st.caption(f"Bu site {visitor_count} kez görüntülendi.")
+# Koddaki ilgili kısmı şu şekilde güncelle:
+contact_form = """
+<form action="https://formspree.io/f/xykaebdy" method="POST">
+    ...
+</form>
+"""
