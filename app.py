@@ -74,3 +74,7 @@ contact_form = """
     ...
 </form>
 """
+# İletişim Formu yerine bu butonu kullan
+st.subheader("📩 İletişim")
+st.write("Bana doğrudan mail göndermek için aşağıdaki butonu kullanabilirsin:")
+st.link_button("E-posta Gönder", "mailto:senin_mail_adresin@email.com")
