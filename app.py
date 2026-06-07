@@ -1,51 +1,70 @@
 import streamlit as st
+from streamlit_extras.mention import mention
+import os
 
-# Sayfa ayarları
-st.set_page_config(page_title="Berk Çelik | Bio", page_icon="🚀", layout="centered")
+# Sayfa Yapılandırması
+st.set_page_config(page_title="Berk Çelik | Portfolio", layout="centered")
 
-# CSS ile genel görünüm (Opsiyonel: Daha şık bir dokunuş için)
+# --- ZİYARETÇİ SAYACI ---
+COUNTER_FILE = "counter.txt"
+def update_counter():
+    if not os.path.exists(COUNTER_FILE):
+        count = 1
+    else:
+        with open(COUNTER_FILE, "r") as f:
+            count = int(f.read()) + 1
+    with open(COUNTER_FILE, "w") as f:
+        f.write(str(count))
+    return count
+
+visitor_count = update_counter()
+
+# --- VERİ VE STİL ---
+PROJECTS = [
+    {"title": "G-ENGINE", "desc": "Donanım arama motoru ve fiyat takip uygulaması.", "link": "https://github.com/KULLANICI_ADIN/G-ENGINE"},
+]
+
 st.markdown("""
     <style>
-    .stButton>button { width: 100%; border-radius: 10px; }
+    .big-font { font-size:40px !important; font-weight: bold; }
     </style>
     """, unsafe_allow_html=True)
 
-# 1. Başlık ve Kısa Tanıtım
-st.title("Berk Çelik")
-st.write("### 💻 Web Developer | 🎮 Gamer | 🎨 3D Modeler")
-st.write("Teknoloji ve oyun dünyasını birleştiren projeler geliştiriyorum. İşte çalışmalarım ve bana ulaşabileceğin kanallar:")
+# --- HEADER ---
+st.markdown('<p class="big-font">Berk Çelik</p>', unsafe_allow_html=True)
+st.write("### Web Developer | Gamer | 3D Modeler")
+
+# --- SOSYAL ---
+col1, col2 = st.columns([1, 5])
+with col1:
+    mention(label="GitHub", icon="github", url="https://github.com/KULLANICI_ADIN")
 
 st.divider()
 
-# 2. Sosyal Linkler (Buton olarak)
-st.subheader("Bana Ulaşın")
-c1, c2, c3 = st.columns(3)
-
-with c1:
-    st.link_button("GitHub", "https://github.com/KULLANICI_ADIN")
-with c2:
-    st.link_button("LinkedIn", "https://linkedin.com/in/KULLANICI_ADIN")
-with c3:
-    st.link_button("Discord", "https://discord.gg/DAVET_LINKIN")
+# --- PROJELER ---
+st.subheader("🚀 Öne Çıkan Projeler")
+for project in PROJECTS:
+    with st.container(border=True):
+        st.write(f"### {project['title']}")
+        st.write(project['desc'])
+        st.link_button("Projeye Git", project['link'])
 
 st.divider()
 
-# 3. Projeler Bölümü
-st.header("Projelerim")
+# --- İLETİŞİM FORMU (Formspree ile) ---
+# Formspree, kod yazmadan e-posta almanı sağlar. 
+# https://formspree.io/ üzerinden ücretsiz hesap açıp bir "Endpoint" almalısın.
+st.subheader("📩 İletişim")
+contact_form = """
+<form action="https://formspree.io/f/KENDI_FORM_ID_BURAYA" method="POST">
+    <input type="hidden" name="_subject" value="Yeni mesaj!">
+    <input type="email" name="email" placeholder="E-posta adresin" required style="width:100%; padding:10px; margin-bottom:10px;">
+    <textarea name="message" placeholder="Mesajın" required style="width:100%; padding:10px;"></textarea>
+    <button type="submit" style="width:100%; padding:10px; background-color:#ff4b4b; color:white; border:none; border-radius:5px;">Gönder</button>
+</form>
+"""
+st.markdown(contact_form, unsafe_allow_html=True)
 
-# G-ENGINE Projesi
-with st.container(border=True):
-    st.subheader("G-ENGINE")
-    st.write("Donanım arama motoru ve fiyat takip uygulaması.")
-    st.link_button("Projeye Git", "https://github.com/KULLANICI_ADIN/G-ENGINE")
-
-# Başka projelerin varsa buraya kopyala-yapıştır yapabilirsin
-with st.container(border=True):
-    st.subheader("Diğer Projem")
-    st.write("Buraya başka bir projenin kısa açıklaması gelecek.")
-    st.link_button("Detayları Gör", "https://github.com/KULLANICI_ADIN/proje-linki")
-
+# --- FOOTER & SAYAÇ ---
 st.divider()
-
-# 4. Footer
-st.caption("© 2026 Berk Çelik - Streamlit ile hazırlandı.")
+st.caption(f"Bu site {visitor_count} kez görüntülendi.")
